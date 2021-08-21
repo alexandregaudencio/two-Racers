@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
 
     public float velocityUp;
 
-
     private Rigidbody2D carRigidbody;
     private float rotationAngle;
     // Start is called before the first frame update
@@ -23,16 +22,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetButton(Constants.)){  MoveFoward(); }
-
-        //if (Input.GetButton(Constants.backward)){MoveBackward(); }
         MoveFowardBack();
         Tork();
         ApplyTraction();
-
-    
-
-
     }
 
     private void MoveFowardBack()
@@ -86,15 +78,6 @@ public class PlayerController : MonoBehaviour
         Vector2 rightVelocity = transform.right * Vector2.Dot(carRigidbody.velocity, transform.right);
         carRigidbody.velocity = forwardVelocity + rightVelocity * traction;
     }
-
-
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-  
-    }
-
 
 
 

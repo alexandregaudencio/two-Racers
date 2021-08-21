@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2633946771655669875}
   - component: {fileID: 2633946771655669876}
+  - component: {fileID: 1157624123}
+  - component: {fileID: 1157624126}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -45,3 +47,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
   targetPlayer: {fileID: 0}
+--- !u!114 &1157624123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2633946771655669877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d61cbb7719472af4cb0e0167696fbc4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIScore: {fileID: 0}
+  UILap: {fileID: 0}
+  maxLap: 3
+--- !u!114 &1157624126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2633946771655669877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d4bd38b39c66645b4a35ae573e7b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTime: 3
+  UIStartTime: {fileID: 0}
