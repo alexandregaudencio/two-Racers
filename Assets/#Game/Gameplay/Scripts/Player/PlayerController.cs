@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
         MoveFowardBack();
         Tork();
         ApplyTraction();
+
     }
 
     private void MoveFowardBack()
