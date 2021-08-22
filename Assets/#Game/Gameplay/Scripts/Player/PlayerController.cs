@@ -8,15 +8,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float verticalAcceleration;
     [SerializeField] private float horizontalAcceleration;
     [SerializeField] [Range(0,1)] private float traction;
+    [SerializeField] private float reactionForce;
 
+    //TODO: ver o que fazer com isso;
     public float velocityUp;
 
     private Rigidbody2D carRigidbody;
     private float rotationAngle;
+
+    GameController gameController;
     // Start is called before the first frame update
     void Start()
     {
         carRigidbody = GetComponent<Rigidbody2D>();
+        gameController = FindObjectOfType<GameController>();
     }
 
     // Update is called once per frame
@@ -80,6 +85,28 @@ public class PlayerController : MonoBehaviour
         carRigidbody.velocity = forwardVelocity + rightVelocity * traction;
     }
 
+
+
+
+    //TODO: Tirar daqui?
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag(Constants.collectable))
+        {
+            gameController.ChangeUIScore(5);
+            Destroy(collision.gameObject);
+        }
+
+
+        if (collision.gameObject.CompareTag(Constants.obstacle))
+        {
+
+            this.carRigidbody.AddForce(transform.up *-1*velocityUp/2, ForceMode2D.Impulse);
+            gameController.ChangeUIScore(-5);
+            Destroy(collision.gameObject);
+
+        }
+    }
 
 
 }

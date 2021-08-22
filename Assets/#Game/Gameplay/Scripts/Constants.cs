@@ -8,6 +8,8 @@ public static class Constants
     public static string vertical = "Vertical";
     //public static string forward = "Forward";
     //public static string backward = "backward";
+    public static string obstacle = "Obstacle";
+    public static string collectable = "Collectable";
 
 
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2633946771655669876}
   - component: {fileID: 1157624123}
   - component: {fileID: 1157624126}
+  - component: {fileID: 3414742103007633786}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -61,6 +62,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIScore: {fileID: 0}
   UILap: {fileID: 0}
+  UIFinishImage: {fileID: 0}
+  playerCar: {fileID: 0}
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
   maxLap: 3
 --- !u!114 &1157624126
 MonoBehaviour:
@@ -76,3 +82,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxTime: 3
   UIStartTime: {fileID: 0}
+--- !u!114 &3414742103007633786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2633946771655669877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35c36bcffd4479149993b83415415377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

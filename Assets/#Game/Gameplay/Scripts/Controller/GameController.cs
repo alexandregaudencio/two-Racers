@@ -15,7 +15,6 @@ public class GameController : MonoBehaviour
 
     private bool isGameStarted;
     private TimerCountdown timerCountdown;
-
     private int score = 0;
     private int lap = 0;
     [SerializeField] private int maxLap;
@@ -34,11 +33,12 @@ public class GameController : MonoBehaviour
         isGameStarted = timerCountdown.IsCountdownOver();
         //TODO: fazer para múltiplos playerscontrollers
         GameObject.FindObjectOfType<PlayerController>().enabled = isGameStarted;
+
     }
 
     public void ChangeUIScore(int score)
     {
-        this.score = score;
+        this.score += score;
         UIScore.text = "Pontos: "+this.score.ToString();
     }
 
