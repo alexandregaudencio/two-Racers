@@ -33,8 +33,8 @@ public class FinishPoint : MonoBehaviour
                 return;
             }
         }
-
         GameController.CheckLap();
+        FindObjectOfType<SimpleObjectGeneration>().ResetAllObstacles();
 
     }
 

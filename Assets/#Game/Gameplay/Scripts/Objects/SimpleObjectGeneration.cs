@@ -13,16 +13,12 @@ public class SimpleObjectGeneration : MonoBehaviour
     public float xOffSet;
     public float yOffSet;
 
-    //private List<GameObject> objectsQueue;
     void Start()
     {
-        //objectsQueue = new List<GameObject>(collectable);
-
-        RegenerationObjectsPosition(collectables,collectableSpawnPosition);
-        RegenerationObjectsPosition(obstacles, obstaclesSpawnPosition);
+        ResetAllObstacles();
     }
 
-    public void RegenerationObjectsPosition(GameObject[] objects, Transform[] positions)
+    private void RegenerationObjectsPosition(GameObject[] objects, Transform[] positions)
     {
         for(int i = 0; i < positions.Length; i++)
         {
@@ -36,10 +32,8 @@ public class SimpleObjectGeneration : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
 
-
-    public void ResetObjectsIteractable(string objectsTag, GameObject[] collectables, Transform[] collectableSpawnPosition)
+    private void ResetObjectsIteractable(string objectsTag, GameObject[] collectables, Transform[] collectableSpawnPosition)
     {
         GameObject[] allObjects = GameObject.FindGameObjectsWithTag(objectsTag);    
         foreach (GameObject objs in allObjects)
@@ -49,13 +43,18 @@ public class SimpleObjectGeneration : MonoBehaviour
         RegenerationObjectsPosition(collectables, collectableSpawnPosition);
     }
 
+    public void ResetAllObstacles()
+    {
+        ResetObjectsIteractable(Constants.collectable, collectables, collectableSpawnPosition);
+        ResetObjectsIteractable(Constants.obstacle, obstacles, obstaclesSpawnPosition);
+    }
+
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            ResetObjectsIteractable(Constants.collectable, collectables, collectableSpawnPosition);
-            ResetObjectsIteractable(Constants.obstacle, obstacles, obstaclesSpawnPosition);
-
+            ResetAllObstacles();
         }
     }
 }

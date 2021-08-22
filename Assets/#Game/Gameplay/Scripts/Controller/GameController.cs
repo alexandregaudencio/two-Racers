@@ -10,8 +10,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private Text UILap;
     [SerializeField] private Image UIFinishImage;
 
-    [SerializeField] private GameObject playerCar;
-    [SerializeField] private Transform[] spawnPoints;
+    //[SerializeField] private GameObject playerCar;
+    //[SerializeField] private Transform[] spawnPoints;
 
     private bool isGameStarted;
     private TimerCountdown timerCountdown;
@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour
         timerCountdown = GetComponent<TimerCountdown>();
         ChangeUIScore(0);
         CheckLap();
-        playerCar.transform.position = spawnPoints[0].transform.position;
+        //playerCar.transform.position = spawnPoints[0].transform.position;
     }
 
 
