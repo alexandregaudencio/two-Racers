@@ -10,7 +10,7 @@ public class GameStartup : MonoBehaviour
 
     void Start()
     {
-        carPlayers[1].SetActive(false);
+        //carPlayers[1].SetActive(false);
         SetCarPosition();
 
     }

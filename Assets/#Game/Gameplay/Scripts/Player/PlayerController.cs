@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float verticalAcceleration;
     [SerializeField] private float horizontalAcceleration;
     [SerializeField] [Range(0,1)] private float traction;
-    [SerializeField] private float reactionForce;
+    [SerializeField] private float rockForceReaction;
 
     //TODO: ver o que fazer com isso;
     public float velocityUp;
@@ -36,29 +36,30 @@ public class PlayerController : MonoBehaviour
     private void MoveFowardBack()
     {
         velocityUp = Vector2.Dot(transform.up, carRigidbody.velocity);
-        //if(velocityUp > maxSpeed && Input.GetAxis(Constants.vertical) > 0.00f)
-        //{
-        //    return;
-        //}
-        //if (velocityUp < -maxSpeed*0.5f && Input.GetAxis(Constants.vertical) < 0.00f)
-        //{
-        //    return;
-        //}
-        //if (carRigidbody.velocity.sqrMagnitude > maxSpeed*maxSpeed && Input.GetAxis(Constants.vertical) > 0.00f)
-        //{
-        //    return;
-        //}
+        if (velocityUp > maxSpeed && Input.GetAxis(Constants.vertical) > 0.00f)
+        {
+            return;
+        }
+        if (velocityUp < -maxSpeed * 0.5f && Input.GetAxis(Constants.vertical) < 0.00f)
+        {
+            return;
+        }
+        if (carRigidbody.velocity.sqrMagnitude > maxSpeed * maxSpeed && Input.GetAxis(Constants.vertical) > 0.00f)
+        {
+            return;
+        }
 
-        
 
-        //if (Input.GetAxis(Constants.vertical) == 0.00 || Input.GetAxis(Constants.vertical) != Mathf.Clamp(velocityUp, -1, 1))
-        //{
-        //    carRigidbody.drag = Mathf.Lerp(carRigidbody.drag, 3.0f, Time.deltaTime * 5);
-        //}else
-        //{
-        //    carRigidbody.drag = 0;
-        //}
-        
+
+        if (Input.GetAxis(Constants.vertical) == 0.00 || Input.GetAxis(Constants.vertical) != Mathf.Clamp(velocityUp, -1, 1))
+        {
+            carRigidbody.drag = Mathf.Lerp(carRigidbody.drag, 3.0f, Time.deltaTime * 5);
+        }
+        else
+        {
+            carRigidbody.drag = 0;
+        }
+
         float forwardInput = Input.GetAxisRaw(Constants.vertical);
         Vector2 moduleVerticalforce = transform.up * verticalAcceleration * forwardInput;
             
@@ -70,9 +71,10 @@ public class PlayerController : MonoBehaviour
     {
         float afterTurningFactor = (carRigidbody.velocity.magnitude / 8);
         afterTurningFactor = Mathf.Clamp01(afterTurningFactor);
+        
         float horizontalInput = Input.GetAxisRaw(Constants.horizontal);
         
-        rotationAngle -= horizontalInput * horizontalAcceleration;
+        rotationAngle -= horizontalInput * horizontalAcceleration/**afterTurningFactor*/;
          
         carRigidbody.MoveRotation(rotationAngle);
 
@@ -109,4 +111,39 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    float GetLarealVelocity()
+    {
+        return Vector2.Dot(transform.right, carRigidbody.velocity);
+    }
+
+    public bool IsTireScreeching(out float lateralVelocity, out bool isBreaking)
+    {
+        lateralVelocity = GetLarealVelocity();
+        isBreaking = false;
+
+        if(Input.GetAxisRaw(Constants.vertical) < 0 && velocityUp > 0)
+        {
+            isBreaking = true;
+            return true;
+        }
+
+        if(Mathf.Abs(GetLarealVelocity()) > 0.4f)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+
+
+
+
+
+
+
+
+
 }
+
+

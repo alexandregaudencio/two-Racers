@@ -7,6 +7,7 @@ TagManager:
   - FinishPoint
   - Obstacle
   - Collectable
+  - Tile
   layers:
   - Default
   - TransparentFX
@@ -43,4 +44,25 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 44494197
+    locked: 0
+  - name: Pista
+    uniqueID: 268711505
+    locked: 0
+  - name: UnderEffects
+    uniqueID: 2750941341
+    locked: 0
+  - name: Player
+    uniqueID: 3622669573
+    locked: 0
+  - name: Objects
+    uniqueID: 1626677113
+    locked: 0
+  - name: Effects
+    uniqueID: 2841595963
+    locked: 0
+  - name: HUD
+    uniqueID: 200966875
     locked: 0

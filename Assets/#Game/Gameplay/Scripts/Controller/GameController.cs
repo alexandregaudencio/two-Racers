@@ -10,9 +10,6 @@ public class GameController : MonoBehaviour
     [SerializeField] private Text UILap;
     [SerializeField] private Image UIFinishImage;
 
-    //[SerializeField] private GameObject playerCar;
-    //[SerializeField] private Transform[] spawnPoints;
-
     private bool isGameStarted;
     private TimerCountdown timerCountdown;
     private int score = 0;
@@ -27,14 +24,26 @@ public class GameController : MonoBehaviour
         //playerCar.transform.position = spawnPoints[0].transform.position;
     }
 
-
-    private void Update()
+    private void FixedUpdate()
     {
-        isGameStarted = timerCountdown.IsCountdownOver();
-        //TODO: fazer para múltiplos playerscontrollers
-        GameObject.FindObjectOfType<PlayerController>().enabled = isGameStarted;
+        CheckingStartGame();
 
     }
+
+
+
+    private void CheckingStartGame()
+    {
+        if (isGameStarted) return;
+        
+        PlayerController[] playerController = FindObjectsOfType<PlayerController>();
+        foreach(PlayerController controller in playerController) {
+            controller.enabled = !timerCountdown.IsTimerRunning() ;
+
+        }
+        isGameStarted = !timerCountdown.IsTimerRunning();
+    }
+
 
     public void ChangeUIScore(int score)
     {

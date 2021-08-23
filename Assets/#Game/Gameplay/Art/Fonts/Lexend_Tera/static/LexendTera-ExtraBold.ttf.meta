@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: d7bd8db700a9dd245845ad5856c3738a
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Lexend Tera
+  fontNames:
+  - Lexend Tera
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: f3c1f9e09a4ebcb4e9bdf2ff6b10e128, type: 3}
+  - {fileID: 12800000, guid: 8548c803023bcff4489a484aa770a98e, type: 3}
+  - {fileID: 12800000, guid: 244ec944da3d51b449c22449b40ed2d4, type: 3}
+  - {fileID: 12800000, guid: 007c7567334a61e4698684ace4120d78, type: 3}
+  - {fileID: 12800000, guid: c33a046993e8deb4bb365bae56d60e27, type: 3}
+  - {fileID: 12800000, guid: d6daf29f5068b85498adf525c3ff723d, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

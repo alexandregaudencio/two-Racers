@@ -8,35 +8,42 @@ public class TimerCountdown : MonoBehaviour
 
     [SerializeField] private float maxTime;
     float currentTime;
-    [SerializeField] private Text UIStartTime;
-
+    [SerializeField] private GameObject UIStartTime;
+    string UIStartTimeText = "0";
     private void Awake()
     {
         currentTime = maxTime;
     }
 
-    public bool IsCountdownOver()
+    public bool IsTimerRunning()
     {
-        return (currentTime > 0.0f) ? false : true;
+        return (currentTime > 0.000f);
     }
 
     private void FixedUpdate()
     {
-        if (!IsCountdownOver())
+        if (IsTimerRunning())
         {
             currentTime -= Time.fixedDeltaTime;
             
-            string time = string.Format("{0:0}", currentTime);
-            UIStartTime.text = time;
+            UIStartTimeText = string.Format("{0:0}", currentTime);
+            UIStartTime.gameObject.GetComponent<Text>().text = UIStartTimeText;
+
         }
         else
         {         
-            UIStartTime.text = "Go!";
-
+            StartCoroutine(AnimationUIStartTime());
         }
         
 
     }
 
+    private IEnumerator AnimationUIStartTime()
+    {
+        UIStartTimeText = "Go!";
+        yield return new WaitForSeconds(2f);
+        UIStartTime.SetActive(false);
+        
+    }
 
 }
