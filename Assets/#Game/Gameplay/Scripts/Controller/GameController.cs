@@ -6,18 +6,23 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private Text UIScore;
+    public static GameController instance;
+
+    public Text UIScore;
     [SerializeField] private Text UILap;
-    [SerializeField] private Image UIFinishImage;
+    [SerializeField] private GameObject UIFinishImage;
 
     private bool isGameStarted;
     private TimerCountdown timerCountdown;
-    private int score = 0;
+    public int score = 0;
     private int lap = 0;
     [SerializeField] private int maxLap;
 
+    public Text currentScore;
+    public Text maxScore;
     private void Start()
     {
+        instance = this;
         timerCountdown = GetComponent<TimerCountdown>();
         ChangeUIScore(0);
         CheckLap();
@@ -69,7 +74,7 @@ public class GameController : MonoBehaviour
     private void FinishGame()
     {
         UIFinishImage.gameObject.SetActive(true);
-
+        Cliente.instance.pegarPontoMax();
     }
 
 }

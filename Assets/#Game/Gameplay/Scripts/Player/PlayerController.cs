@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float horizontalAcceleration;
     [SerializeField] [Range(0,1)] private float traction;
     [SerializeField] private float rockForceReaction;
+    public int qntObs = 0;
+    public int qntCol = 0;
 
     //TODO: ver o que fazer com isso;
     public float velocityUp;
@@ -30,7 +32,6 @@ public class PlayerController : MonoBehaviour
         MoveFowardBack();
         Tork();
         ApplyTraction();
-
     }
 
     private void MoveFowardBack()
@@ -93,20 +94,31 @@ public class PlayerController : MonoBehaviour
     //TODO: Tirar daqui?
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag(Constants.collectable))
+        if (collision.gameObject.CompareTag(Constants.collectable))
         {
-            gameController.ChangeUIScore(5);
+
+            qntCol++;
+
+            Cliente.instance.inserirCol(qntCol);
+            Cliente.instance.pegarPonto();
+            //gameController.ChangeUIScore(5);
             Destroy(collision.gameObject);
         }
 
 
-        if (collision.gameObject.CompareTag(Constants.obstacle))
+        else
         {
+            if (collision.gameObject.CompareTag(Constants.obstacle))
+            {
 
-            this.carRigidbody.AddForce(transform.up *-1*velocityUp/2, ForceMode2D.Impulse);
-            gameController.ChangeUIScore(-5);
-            Destroy(collision.gameObject);
+                qntObs++;
+                Cliente.instance.inserirObsCol(qntObs);
+                Cliente.instance.pegarPonto();
+                this.carRigidbody.AddForce(transform.up * -1 * velocityUp / 2, ForceMode2D.Impulse);
+                //gameController.ChangeUIScore(-5);
+                Destroy(collision.gameObject);
 
+            }
         }
     }
 
