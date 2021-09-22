@@ -25,17 +25,28 @@ public class Cliente : MonoBehaviour
     public static Cliente instance;
     string usuario;
     public string usuarioLogado;
+    public string jogador1, jogador2;
     int senha;
     int pontos;
+    public int score1;
+    public  int score2;
+    int result;
+    public string[] point;
     public string score;
+    public int i;
+    private float x, y, z;
     private TcpClient cliente;
     private StreamReader reader = null;
     private StreamWriter writer = null;
     private Thread thread;
     private bool running = false;
+    public bool startingPlayers = false;
     System.Random rnd;
     int maxScore;
     int currentScore;
+    public int id;
+    public int cod;
+    public int a;
     void Start()
     {
         if (instance == null)
@@ -63,7 +74,13 @@ public class Cliente : MonoBehaviour
         {
             gameplay = true;
         }
+        if (startingPlayers)
+        {
+            start2();
         }
+
+       // a = GameController.instance.chegou;
+    }
 
     private void OnApplicationQuit()
     {
@@ -88,6 +105,9 @@ public class Cliente : MonoBehaviour
         reader = new StreamReader(stream);
         writer = new StreamWriter(stream);
         string dados;
+       // if(a<1)
+       /// finishGame();
+
         //cadastro();
         //login();
         //pegarPonto();
@@ -98,7 +118,7 @@ public class Cliente : MonoBehaviour
             try
             {
 
-                Thread.Sleep(1000);
+                dados = reader.ReadLine();
 
             }
             catch
@@ -313,6 +333,288 @@ public class Cliente : MonoBehaviour
         }
         while (running);
        }
+  /*  public void enviarPonto()
+    {
+        string dados;
+        do
+        {
+
+            EnviarMsg("t", $"{score}");
+            Debug.Log(score);
+            Thread.Sleep(100);
+            Debug.Log(usuario + " WAITING");
+            dados = reader.ReadLine();
+            Debug.Log(dados);
+           
+            point =dados.Split(';');
+            int.TryParse(point[1], out result);
+            Debug.Log("cod " + cod);
+            Debug.Log("point " + point);
+            Debug.Log("result" + result);
+            if (cod == 1)
+            {
+                score1 = result;
+                Debug.Log("score1: "+score1);
+            }
+            if (cod == 2)
+            {
+                score2 = result;
+                Debug.Log("score2: " + score2);
+            }
+            GameController.instance.score1.text = ("Pontuacao jogador1: " + score1.ToString());
+            GameController.instance.score2.text = ("Pontuacao jogador2: " + score2.ToString());
+
+            break;
+        }
+        while (running);
+    }*/
+    public void enviarScore1()
+    {
+        string dados;
+        do
+        {
+            if (cod == 1)
+            {
+                EnviarMsg("y", $"{score}");
+            }
+            Debug.Log(score);
+            Thread.Sleep(100);
+            Debug.Log(usuario + " WAITING");
+            dados = reader.ReadLine();
+            Debug.Log(dados);
+
+            point = dados.Split(';');
+            int.TryParse(point[1], out result);
+            Debug.Log("cod " + cod);
+            Debug.Log("point " + point);
+            Debug.Log("result" + result);
+            
+                score1 = result;
+             
+
+            break;
+        }
+        while (running);
+    }
+    public void enviarScore2()
+    {
+        string dados;
+        do
+        {
+            if (cod == 2)
+            {
+                EnviarMsg("u", $"{score}");
+            }
+            Debug.Log(score);
+            Thread.Sleep(100);
+            Debug.Log(usuario + " WAITING");
+            dados = reader.ReadLine();
+            Debug.Log(dados);
+
+            string[] point2 = dados.Split(';');
+            int result2;
+            int.TryParse(point2[1], out result2);
+            Debug.Log("cod " + cod);
+            Debug.Log("point " + point);
+            Debug.Log("result" + result);
+
+            score2 = result2;
+
+
+            break;
+        }
+        while (running);
+    }
+    public void finishGame()
+    {
+       
+        EnviarMsg("b", $"chegou");
+    }
+
+    public void contadorFinish()
+    {
+        
+        do
+        {
+
+            EnviarMsg("3", $"chegou");
+            Thread.Sleep(100);
+            Debug.Log(usuario + " WAITING");
+           
+
+
+            break;
+        }
+        while (running);
+    }
+    public void pegarID()
+    {
+        string dados;
+        do
+        {
+
+            EnviarMsg("z", $"{usuarioLogado}.id");
+            Thread.Sleep(100);
+            Debug.Log(usuario + " WAITING");
+            dados = reader.ReadLine();
+            Debug.Log(dados);
+            int.TryParse(dados, out id);
+            if (id % 2 == 1) cod = 1;
+            if (id % 2 == 0) cod = 2;
+            Debug.Log("id: "+cod);
+            break;
+        }
+        while (running);
+    }
+    public void pegarNomeJogadores()
+    {
+        string dados;
+        do
+        {
+
+            EnviarMsg("0", $"nomes");
+            Thread.Sleep(100);
+            Debug.Log(usuario + " WAITING");
+            dados = reader.ReadLine();
+            Debug.Log(dados);
+            string[] info = dados.Split(';');
+            
+            jogador1= info[0];
+            jogador2= info[1];
+            Debug.Log(jogador1);
+            Debug.Log(jogador2);
+
+            break;
+            
+
+
+
+        }
+        while (running);
+    }
+    public int pegarScoreJogadores(string jogador)
+    {
+        string dados;
+        do
+        {
+            Debug.Log("jogador " + jogador);
+            EnviarMsg("2", $"{jogador}.pontos");
+            Thread.Sleep(100);
+            Debug.Log(usuario + " WAITING");
+            dados = reader.ReadLine();
+            Debug.Log(dados);
+            int jogadorPonto;
+            //string[] info = dados.Split(';');
+            int.TryParse(dados, out jogadorPonto);
+            //int.TryParse(info[1], out score2);
+            // Debug.Log("score1: "+score1);
+            // Debug.Log("score2: "+score2);
+            Debug.Log(jogadorPonto);
+            return jogadorPonto;
+            break;
+
+
+
+
+        }
+        while (running);
+    }
+    public void start2()
+    {
+        string dados;
+        do
+        {
+
+            EnviarMsg("ç", $"{usuarioLogado}.start");
+            Thread.Sleep(100);
+            Debug.Log(usuario + " WAITING");
+            dados = reader.ReadLine();
+            Debug.Log("msg: " + dados);
+           // int i;
+            int.TryParse(dados, out i);
+            //   if (i == 2)
+            //  {
+            //       InputController.instance.comecar = true;
+            //   }
+            startingPlayers = true;
+            break;
+        }
+        while (running);
+    }
+
+    public void enviarPosicao1()
+    {
+        string dados;
+        do
+        {
+            if (cod == 1)
+            {
+                EnviarMsg("1", $"{ PlayerController.instance.xUpdate}.{ PlayerController.instance.yUpdate}.{ PlayerController.instance.zUpdate}");
+            }
+            Thread.Sleep(100);
+            Debug.Log(usuario + " WAITING");
+            dados = reader.ReadLine();
+            Debug.Log(dados);
+            var info = dados.Split("."[0]);
+            
+            
+                // trans.position = new Vector3(1f, 2f, 3f);
+                //PlayerController2.instance.transform.position.x= float.Parse(info[0]);
+                 x = float.Parse(info[0]);
+                 y = float.Parse(info[1]);
+                 z = float.Parse(info[2]);
+               // PlayerController.instance.trans.position = new Vector3(x,y,z);
+                // PlayerController2.instance.transform.position.x = info[0];
+            
+           
+            break;
+        }
+        while (running);
+    }
+    public void receberPosicao1()
+    {
+        if (cod == 2)
+        {
+            PlayerController.instance.trans.position = new Vector3(x, y, z);
+        }
+      }
+
+    public void jogar()
+    {
+        string dados;
+        do
+        {
+            
+            EnviarMsg("j", $"{usuarioLogado}.jogar");
+            Thread.Sleep(100);
+            Debug.Log(usuario + " WAITING");
+            dados = reader.ReadLine();
+
+            if (dados.Equals(Estado.FOI.ToString()))
+            {
+
+                Debug.Log("usuario foi pra partida");
+                break;
+            }
+            if (dados.Equals(Estado.NAOFOI.ToString()))
+            {
+
+                Debug.Log("usuario n foi pra partida");
+                break;
+            }
+            if (dados.Equals(Estado.ERRO.ToString()))
+            {
+
+                Debug.Log("deu ruim");
+                break;
+            }
+            else
+            {
+                break;
+            }
+        }
+        while (running);
+    }
     public void pegarPontoMax()
     {
         string dados;
@@ -329,8 +631,15 @@ public class Cliente : MonoBehaviour
             int.TryParse(dados, out maxScore);
             int.TryParse(score, out currentScore);
 
-            
-
+           /* if (cod == 1)
+            {
+                 score1 = currentScore;
+            }
+            if (cod == 2)
+            {
+                 score2 = currentScore;
+            }
+            */
             if (currentScore>maxScore)
             {
                 Debug.Log("Pontuacao maxima atualizada");
@@ -339,12 +648,17 @@ public class Cliente : MonoBehaviour
                 pegarPontoMax();
                 GameController.instance.maxScore.text = ("Novo Recorde: " + maxScore.ToString());
 
+                //GameController.instance.score1.text = ("Pontuacao jogador1: " + score1.ToString());
+               // GameController.instance.score2.text = ("Pontuacao jogador2: " + score2.ToString());
             }
             else
             {
                 Debug.Log("Pontuacao maxima nao atualizada");
                 GameController.instance.currentScore.text = ("Sua pontuacao: " + currentScore.ToString());
                 GameController.instance.maxScore.text = ("Seu Recorde: " + maxScore.ToString());
+
+               // GameController.instance.score1.text = ("Pontuacao jogador1: " + score1.ToString());
+               // GameController.instance.score2.text = ("Pontuacao jogador2: " + score2.ToString());
             }
            break;
         }

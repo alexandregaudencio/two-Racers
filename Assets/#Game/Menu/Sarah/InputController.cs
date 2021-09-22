@@ -14,11 +14,15 @@ public class InputController : MonoBehaviour
     public Text msgJogadorC;
     public Text msgJogadorL;
     public Text msgJogadorLC;
-   
+    public int jogadores;
     public string msg;
     public Text[] ranks;
+    public bool comecar;
+    public bool apertar;
     void Start()
     {
+        comecar = false;
+        apertar = false;
         instance = this;
         msg = "";
         //DontDestroyOnLoad(gameObject);
@@ -27,14 +31,24 @@ public class InputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log("jogadores: " + jogadores);
+        if (Cliente.instance.i==2 &&apertar==true)
+        {
+            SceneManager.LoadScene("Gameplay");
+            Cliente.instance.startingPlayers = false;
+        }
+
         msgJogadorC.text = msg.ToString();
         msgJogadorL.text = msg.ToString();
         msgJogadorLC.text = msg.ToString();
     }
     public void nextLevel()
     {
-       // Cliente.instance.Conectar();
-        SceneManager.LoadScene("Gameplay");
+        // Cliente.instance.Conectar();
+        
+        //jogadores++;
+        // SceneManager.LoadScene("Gameplay");
+        apertar = true;
         MenuController.instance.loginokUi.SetActive(false);
     }
 }

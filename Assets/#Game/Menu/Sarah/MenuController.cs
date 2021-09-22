@@ -18,7 +18,11 @@ public class MenuController : MonoBehaviour
 
     private void Start()
     {
-       // Cliente.instance.Desconectar();
+        
+    }
+    private void Update()
+    {
+        //Cliente.instance.start2();
     }
     public void irOpcoes()
     {

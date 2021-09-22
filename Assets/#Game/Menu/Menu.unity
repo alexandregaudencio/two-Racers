@@ -1720,6 +1720,39 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1143670529}
+        m_MethodName: jogar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1143670529}
+        m_MethodName: pegarID
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1143670529}
+        m_MethodName: start2
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &413743731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3669,6 +3702,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   usuarioLogado: 
   score: 
+  i: 0
+  id: 0
+  cod: 0
 --- !u!4 &1143670530
 Transform:
   m_ObjectHideFlags: 0
@@ -6255,6 +6291,7 @@ MonoBehaviour:
   msgJogadorC: {fileID: 2041364083}
   msgJogadorL: {fileID: 698457891}
   msgJogadorLC: {fileID: 538174365}
+  jogadores: 0
   msg: 
   ranks:
   - {fileID: 1833241136}
@@ -6267,6 +6304,8 @@ MonoBehaviour:
   - {fileID: 1664143460}
   - {fileID: 1131761777}
   - {fileID: 1648119270}
+  comecar: 0
+  apertar: 0
 --- !u!4 &1922289497
 Transform:
   m_ObjectHideFlags: 0

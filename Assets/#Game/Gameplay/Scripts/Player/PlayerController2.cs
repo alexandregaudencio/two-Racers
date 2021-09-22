@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController2 : MonoBehaviour
 {
-    public static PlayerController instance;
+    public static PlayerController2 instance;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float verticalAcceleration;
     [SerializeField] private float horizontalAcceleration;
-    [SerializeField] [Range(0,1)] private float traction;
+    [SerializeField] [Range(0, 1)] private float traction;
     [SerializeField] private float rockForceReaction;
     public int qntObs = 0;
     public int qntCol = 0;
@@ -17,15 +17,15 @@ public class PlayerController : MonoBehaviour
     public float velocityUp;
 
     private Rigidbody2D carRigidbody;
-    private float rotationAngle;
-    public float xUpdate;
-    public float yUpdate;
-    public float zUpdate;
-    GameController gameController;
     public Transform trans;
+    private float rotationAngle;
+
+    GameController gameController;
     // Start is called before the first frame update
     void Start()
     {
+        //trans.position = new Vector3(1f, 5f, 3f);
+       // GameStartup.instance.carPlayers[0].transform.position = new Vector3(1f, 5f, 3f);
         instance = this;
         carRigidbody = GetComponent<Rigidbody2D>();
         gameController = FindObjectOfType<GameController>();
@@ -35,25 +35,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        xUpdate = transform.position.x;
-        yUpdate = transform.position.y;
-        zUpdate = transform.position.z;
-
-        
-        if (Cliente.instance.id % 2 == 1)
+        //trans.position = new Vector3(1f, 5f, 3f);
+        if (Cliente.instance.id%2==0)
         {
             MoveFowardBack();
             Tork();
             ApplyTraction();
         }
-       
+
     }
 
     private void MoveFowardBack()
     {
-     //  Cliente.instance.enviarPosicao1();
-
-         velocityUp = Vector2.Dot(transform.up, carRigidbody.velocity);
+       // Cliente.instance.receberPosicao1();
+        velocityUp = Vector2.Dot(transform.up, carRigidbody.velocity);
         if (velocityUp > maxSpeed && Input.GetAxis(Constants.vertical) > 0.00f)
         {
             return;
@@ -80,20 +75,20 @@ public class PlayerController : MonoBehaviour
 
         float forwardInput = Input.GetAxisRaw(Constants.vertical);
         Vector2 moduleVerticalforce = transform.up * verticalAcceleration * forwardInput;
-            
+
         carRigidbody.AddForce(moduleVerticalforce, ForceMode2D.Force);
-    
+
     }
 
     private void Tork()
     {
         float afterTurningFactor = (carRigidbody.velocity.magnitude / 8);
         afterTurningFactor = Mathf.Clamp01(afterTurningFactor);
-        
+
         float horizontalInput = Input.GetAxisRaw(Constants.horizontal);
-        
+
         rotationAngle -= horizontalInput * horizontalAcceleration/**afterTurningFactor*/;
-         
+
         carRigidbody.MoveRotation(rotationAngle);
 
     }
@@ -150,13 +145,13 @@ public class PlayerController : MonoBehaviour
         lateralVelocity = GetLarealVelocity();
         isBreaking = false;
 
-        if(Input.GetAxisRaw(Constants.vertical) < 0 && velocityUp > 0)
+        if (Input.GetAxisRaw(Constants.vertical) < 0 && velocityUp > 0)
         {
             isBreaking = true;
             return true;
         }
 
-        if(Mathf.Abs(GetLarealVelocity()) > 0.4f)
+        if (Mathf.Abs(GetLarealVelocity()) > 0.4f)
         {
             return true;
         }

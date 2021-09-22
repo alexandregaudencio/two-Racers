@@ -15,13 +15,17 @@ public class GameController : MonoBehaviour
     private bool isGameStarted;
     private TimerCountdown timerCountdown;
     public int score = 0;
+    public int chegou = 0;
     private int lap = 0;
     [SerializeField] private int maxLap;
 
     public Text currentScore;
+    public Text score1;
+    public Text score2;
     public Text maxScore;
     private void Start()
     {
+        Cliente.instance.pegarNomeJogadores();
         instance = this;
         timerCountdown = GetComponent<TimerCountdown>();
         ChangeUIScore(0);
@@ -32,7 +36,12 @@ public class GameController : MonoBehaviour
     private void FixedUpdate()
     {
         CheckingStartGame();
-
+       
+        if (chegou == 1)
+        {
+            FinishGame();
+            chegou = 2;
+        }
     }
 
 
@@ -66,7 +75,9 @@ public class GameController : MonoBehaviour
         else
         {
             UILap.text = "Partida acabou! ";
-            FinishGame();
+            Cliente.instance.contadorFinish();
+            Cliente.instance.finishGame();
+            //FinishGame();
         }
 
     }
@@ -75,6 +86,12 @@ public class GameController : MonoBehaviour
     {
         UIFinishImage.gameObject.SetActive(true);
         Cliente.instance.pegarPontoMax();
+        Cliente.instance.score1= Cliente.instance.pegarScoreJogadores(Cliente.instance.jogador1);
+        Cliente.instance.score2=Cliente.instance.pegarScoreJogadores(Cliente.instance.jogador2);
+        GameController.instance.score1.text = ("Pontuacao jogador1: " + Cliente.instance.score1.ToString());
+        GameController.instance.score2.text = ("Pontuacao jogador2: " + Cliente.instance.score2.ToString());
+        // Cliente.instance.enviarScore2();
+        //Cliente.instance.enviarScore1();
     }
 
 }

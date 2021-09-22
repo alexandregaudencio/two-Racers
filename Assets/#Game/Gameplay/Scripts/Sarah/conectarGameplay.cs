@@ -9,10 +9,15 @@ public class conectarGameplay : MonoBehaviour
     {
         Cliente.instance.inserirCol(0);
         Cliente.instance.inserirObsCol(0);
+       // Cliente.instance.pegarID();
 
     }
+    private void Update()
+    {
+        //  Cliente.instance.pegarID();
+        // Cliente.instance.enviarPosicao1();
+    }
 
-    
     public void pont()
     {
         Cliente.instance.inserirPonto();
