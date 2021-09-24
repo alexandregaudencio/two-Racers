@@ -11,6 +11,11 @@ public class GameController : MonoBehaviour
     public Text UIScore;
     [SerializeField] private Text UILap;
     [SerializeField] private GameObject UIFinishImage;
+    [SerializeField] private GameObject vencedor1Ui;
+    [SerializeField] private GameObject vencedor2Ui;
+    [SerializeField] private GameObject empateUi;
+    [SerializeField] private GameObject jogador1Ui;
+    [SerializeField] private GameObject jogador2Ui;
 
     private bool isGameStarted;
     private TimerCountdown timerCountdown;
@@ -26,10 +31,19 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         Cliente.instance.pegarNomeJogadores();
+        Cliente.instance.startingPlayers=false;
         instance = this;
         timerCountdown = GetComponent<TimerCountdown>();
         ChangeUIScore(0);
         CheckLap();
+        if (Cliente.instance.id % 2 == 1)
+        {
+            jogador1Ui.SetActive(true);
+        }
+        if (Cliente.instance.id % 2 == 0)
+        {
+            jogador2Ui.SetActive(true);
+        }
         //playerCar.transform.position = spawnPoints[0].transform.position;
     }
 
@@ -40,7 +54,7 @@ public class GameController : MonoBehaviour
         if (chegou == 1)
         {
             FinishGame();
-            chegou = 2;
+            //chegou = 2;
         }
     }
 
@@ -76,22 +90,48 @@ public class GameController : MonoBehaviour
         {
             UILap.text = "Partida acabou! ";
             Cliente.instance.contadorFinish();
-            Cliente.instance.finishGame();
-            //FinishGame();
+            if (Cliente.instance.id % 2 == 1)
+            {
+                Cliente.instance.vencedor = 1;
+            }
+            if (Cliente.instance.id % 2 == 0)
+            {
+                Cliente.instance.vencedor = 2;
+            }
+
         }
 
     }
 
     private void FinishGame()
     {
+        //chegou = 2;
         UIFinishImage.gameObject.SetActive(true);
         Cliente.instance.pegarPontoMax();
-        Cliente.instance.score1= Cliente.instance.pegarScoreJogadores(Cliente.instance.jogador1);
-        Cliente.instance.score2=Cliente.instance.pegarScoreJogadores(Cliente.instance.jogador2);
+        Cliente.instance.pegarScoreJogador1();
+        Cliente.instance.pegarScoreJogador2();
+      /*  if (Cliente.instance.vencedor == 1)
+        {
+            Cliente.instance.score1 = Cliente.instance.score1 + 5;
+        }
+        if (Cliente.instance.vencedor == 2)
+        {
+            Cliente.instance.score2 = Cliente.instance.score2 + 5;
+        }*/
+        if (Cliente.instance.score1 > Cliente.instance.score2)
+        {
+            vencedor1Ui.SetActive(true);
+        }
+        if (Cliente.instance.score2 > Cliente.instance.score1)
+        {
+            vencedor2Ui.SetActive(true);
+        }
+        if (Cliente.instance.score2== Cliente.instance.score1)
+        {
+            //empateUi.SetActive(true);
+        }
         GameController.instance.score1.text = ("Pontuacao jogador1: " + Cliente.instance.score1.ToString());
         GameController.instance.score2.text = ("Pontuacao jogador2: " + Cliente.instance.score2.ToString());
-        // Cliente.instance.enviarScore2();
-        //Cliente.instance.enviarScore1();
     }
 
 }

@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     //TODO: ver o que fazer com isso;
     public float velocityUp;
 
-    private Rigidbody2D carRigidbody;
+    public Rigidbody2D carRigidbody;
     private float rotationAngle;
     public float xUpdate;
     public float yUpdate;
@@ -27,24 +27,26 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         instance = this;
-        carRigidbody = GetComponent<Rigidbody2D>();
+       // carRigidbody = GetComponent<Rigidbody2D>();
         gameController = FindObjectOfType<GameController>();
-        trans = FindObjectOfType<Transform>();
+        //trans = FindObjectOfType<Transform>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        xUpdate = transform.position.x;
-        yUpdate = transform.position.y;
-        zUpdate = transform.position.z;
+       
+        //trans.position = new Vector3(2f, 2f, 0);
 
-        
         if (Cliente.instance.id % 2 == 1)
         {
             MoveFowardBack();
             Tork();
             ApplyTraction();
+            xUpdate = transform.position.x;
+            yUpdate = transform.position.y;
+            zUpdate = rotationAngle;
         }
        
     }
@@ -111,30 +113,34 @@ public class PlayerController : MonoBehaviour
     //TODO: Tirar daqui?
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(Constants.collectable))
+        if (Cliente.instance.id % 2 == 1)
         {
-
-            qntCol++;
-
-            Cliente.instance.inserirCol(qntCol);
-            Cliente.instance.pegarPonto();
-            //gameController.ChangeUIScore(5);
-            Destroy(collision.gameObject);
-        }
-
-
-        else
+            if (collision.gameObject.CompareTag(Constants.collectable))
         {
-            if (collision.gameObject.CompareTag(Constants.obstacle))
-            {
+            
+                qntCol++;
 
-                qntObs++;
-                Cliente.instance.inserirObsCol(qntObs);
+                Cliente.instance.inserirCol(qntCol);
                 Cliente.instance.pegarPonto();
-                this.carRigidbody.AddForce(transform.up * -1 * velocityUp / 2, ForceMode2D.Impulse);
-                //gameController.ChangeUIScore(-5);
+                //gameController.ChangeUIScore(5);
                 Destroy(collision.gameObject);
 
+            }
+
+
+            else
+            {
+                if (collision.gameObject.CompareTag(Constants.obstacle))
+                {
+
+                    qntObs++;
+                    Cliente.instance.inserirObsCol(qntObs);
+                    Cliente.instance.pegarPonto();
+                    this.carRigidbody.AddForce(transform.up * -1 * velocityUp / 2, ForceMode2D.Impulse);
+                    //gameController.ChangeUIScore(-5);
+                    Destroy(collision.gameObject);
+
+                }
             }
         }
     }

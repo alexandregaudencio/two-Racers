@@ -438,7 +438,7 @@ RectTransform:
   - {fileID: 35449804}
   - {fileID: 1157966350}
   m_Father: {fileID: 2104467225}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2336,7 +2336,7 @@ RectTransform:
   m_Children:
   - {fileID: 1817559121}
   m_Father: {fileID: 2104467225}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3701,10 +3701,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   usuarioLogado: 
+  jogador1: 
+  jogador2: 
+  vencedor: 0
+  score1: 0
+  score2: 0
+  point: []
   score: 
   i: 0
+  startingPlayers: 0
   id: 0
   cod: 0
+  a: 0
+  loginCheck: 0
+  cadastroCheck: 0
+  maxScoreCheck: 0
+  rankArray:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
 --- !u!4 &1143670530
 Transform:
   m_ObjectHideFlags: 0
@@ -4020,7 +4039,7 @@ RectTransform:
   - {fileID: 2083029980}
   - {fileID: 1743761074}
   m_Father: {fileID: 2104467225}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4295,7 +4314,7 @@ RectTransform:
   - {fileID: 278939949}
   - {fileID: 1450585238}
   m_Father: {fileID: 2104467225}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4552,7 +4571,7 @@ RectTransform:
   m_Children:
   - {fileID: 126306585}
   m_Father: {fileID: 2104467225}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5025,7 +5044,7 @@ RectTransform:
   - {fileID: 2094847614}
   - {fileID: 430989200}
   m_Father: {fileID: 2104467225}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5603,6 +5622,84 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1677644651}
   m_CullTransparentMesh: 0
+--- !u!1 &1687811090
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1687811091}
+  - component: {fileID: 1687811093}
+  - component: {fileID: 1687811092}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1687811091
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687811090}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2104467225}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 353.54712, y: 104.003296}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1687811092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687811090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9245283, g: 0.8721964, b: 0.09158063, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 20
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Aguardando outro jogador...
+--- !u!222 &1687811093
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687811090}
+  m_CullTransparentMesh: 0
 --- !u!1 &1738192202
 GameObject:
   m_ObjectHideFlags: 0
@@ -6014,7 +6111,7 @@ RectTransform:
   - {fileID: 838373878}
   - {fileID: 86899148}
   m_Father: {fileID: 2104467225}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6908,6 +7005,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 1687811091}
   - {fileID: 1233507731}
   - {fileID: 1815417141}
   - {fileID: 1565833086}
@@ -7242,6 +7340,11 @@ PrefabInstance:
       propertyPath: opcoesUi
       value: 
       objectReference: {fileID: 35825112}
+    - target: {fileID: 3604734526386787856, guid: c071f882a7557d245850c4fb0077d9b9,
+        type: 3}
+      propertyPath: aguardeUi
+      value: 
+      objectReference: {fileID: 1687811090}
     - target: {fileID: 3604734526386787856, guid: c071f882a7557d245850c4fb0077d9b9,
         type: 3}
       propertyPath: loginokUi

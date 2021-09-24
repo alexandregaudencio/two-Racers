@@ -19,6 +19,7 @@ public class InputController : MonoBehaviour
     public Text[] ranks;
     public bool comecar;
     public bool apertar;
+    
     void Start()
     {
         comecar = false;
@@ -34,8 +35,9 @@ public class InputController : MonoBehaviour
         //Debug.Log("jogadores: " + jogadores);
         if (Cliente.instance.i==2 &&apertar==true)
         {
-            SceneManager.LoadScene("Gameplay");
             Cliente.instance.startingPlayers = false;
+            SceneManager.LoadScene("Gameplay");
+            
         }
 
         msgJogadorC.text = msg.ToString();
@@ -50,5 +52,6 @@ public class InputController : MonoBehaviour
         // SceneManager.LoadScene("Gameplay");
         apertar = true;
         MenuController.instance.loginokUi.SetActive(false);
+        MenuController.instance.aguardeUi.SetActive(true);
     }
 }

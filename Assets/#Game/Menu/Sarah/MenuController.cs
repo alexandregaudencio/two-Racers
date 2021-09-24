@@ -15,7 +15,8 @@ public class MenuController : MonoBehaviour
     public GameObject cadastroCertoUi;
     public GameObject loginCertoUi;
     public GameObject loginokUi;
-
+    public GameObject aguardeUi;
+    
     private void Start()
     {
         
